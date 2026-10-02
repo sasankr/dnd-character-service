@@ -1,0 +1,40 @@
+﻿{
+  "name": "Briv",
+  "level": 5,
+  "hitPoints": 25,
+  "classes": [
+    {
+      "name": "Fighter",
+      "hitDiceValue": 10,
+      "classLevel": 5
+    }
+  ],
+  "stats": {
+    "strength": 15,
+    "dexterity": 14,
+    "constitution": 13,
+    "intelligence": 12,
+    "wisdom": 10,
+    "charisma": 8
+  },
+  "items": [
+    {
+      "name": "Ioun Stone of Protection",
+      "modifier": {
+        "affectedObject": "stats",
+        "affectedValue": "armorClass",
+        "value": 1
+      }
+    }
+  ],
+  "defenses": [
+    {
+      "type": "fire",
+      "defense": "immunity"
+    },
+    {
+      "type": "slashing",
+      "defense": "resistance"
+    }
+  ]
+}
