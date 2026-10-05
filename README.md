@@ -1,6 +1,6 @@
 # D&D Character Hit Point Management Service
 
-A full-stack TypeScript application for managing player character Hit Points (HP) according to official Dungeons & Dragons (5th Edition) combat rules. Built for the D&D Beyond Take-Home Challenge.
+A full-stack TypeScript application for managing player character Hit Points (HP) according to the D&D 5e hit point rules required by the challenge. Built for the D&D Beyond Take-Home Challenge.
 
 ---
 
