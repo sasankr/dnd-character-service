@@ -1,4 +1,4 @@
-﻿import { Router } from 'express';
+import { Router } from 'express';
 import { CharacterController } from '../controllers/characterController';
 
 export function createCharacterRouter(controller: CharacterController): Router {

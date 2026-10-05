@@ -1,4 +1,4 @@
-﻿import { Defense } from './damage';
+import { Defense } from './damage';
 
 export interface CharacterStats {
   strength: number;

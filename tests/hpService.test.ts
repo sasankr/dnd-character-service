@@ -1,4 +1,4 @@
-﻿import { HpService } from '../src/services/hpService';
+import { HpService } from '../src/services/hpService';
 import { CharacterState } from '../src/types/character';
 
 describe('HpService', () => {

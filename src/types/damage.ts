@@ -1,4 +1,4 @@
-﻿export type DamageType =
+export type DamageType =
   | 'bludgeoning'
   | 'piercing'
   | 'slashing'

@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import { CharacterData, CharacterState } from '../types/character';
 

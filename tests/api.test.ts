@@ -1,4 +1,4 @@
-﻿import request from 'supertest';
+import request from 'supertest';
 import path from 'path';
 import { createApp } from '../src/app';
 import { CharacterRepository } from '../src/services/characterRepository';

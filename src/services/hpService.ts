@@ -1,4 +1,4 @@
-﻿import { CharacterState } from '../types/character';
+import { CharacterState } from '../types/character';
 import { DamageType } from '../types/damage';
 
 export class HpService {

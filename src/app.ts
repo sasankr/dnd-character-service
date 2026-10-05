@@ -1,4 +1,4 @@
-﻿import express, { Express } from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import { CharacterRepository } from './services/characterRepository';
 import { CharacterController } from './controllers/characterController';

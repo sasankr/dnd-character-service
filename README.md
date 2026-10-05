@@ -1,4 +1,4 @@
-﻿# D&D Character HP Service
+# D&D Character HP Service
 
 A backend service built with TypeScript and Express to track and manage player character hit points, damage mitigation, healing, and temporary HP following standard D&D 5e rules.
 

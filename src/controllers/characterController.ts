@@ -1,4 +1,4 @@
-﻿import { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { CharacterRepository } from '../services/characterRepository';
 import { HpService } from '../services/hpService';
 
