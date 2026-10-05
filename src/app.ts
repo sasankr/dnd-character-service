@@ -1,10 +1,13 @@
 ﻿import express, { Express } from 'express';
+import cors from 'cors';
 import { CharacterRepository } from './services/characterRepository';
 import { CharacterController } from './controllers/characterController';
 import { createCharacterRouter } from './routes/characterRoutes';
 
 export function createApp(repo?: CharacterRepository): Express {
   const app = express();
+  
+  app.use(cors());
   app.use(express.json());
 
   const characterRepository = repo || new CharacterRepository();
