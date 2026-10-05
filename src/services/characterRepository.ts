@@ -13,6 +13,7 @@ export class CharacterRepository {
 
   /**
    * Loads all JSON character files from the data directory into memory.
+   * Strips UTF-8 BOM if present to ensure clean JSON parsing across platforms.
    */
   public initialize(): void {
     if (!fs.existsSync(this.dataDir)) {
@@ -24,7 +25,13 @@ export class CharacterRepository {
     for (const file of files) {
       const characterId = path.basename(file, '.json').toLowerCase();
       const filePath = path.join(this.dataDir, file);
-      const rawContent = fs.readFileSync(filePath, 'utf-8');
+      
+      let rawContent = fs.readFileSync(filePath, 'utf-8');
+      // Strip UTF-8 BOM if present
+      if (rawContent.charCodeAt(0) === 0xfeff) {
+        rawContent = rawContent.slice(1);
+      }
+
       const data: CharacterData = JSON.parse(rawContent);
 
       const state: CharacterState = {
