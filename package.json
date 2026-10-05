@@ -12,7 +12,8 @@
                     "dev:client":  "npm --prefix client run dev",
                     "dev:all":  "concurrently \"npm run dev\" \"npm run dev:client\"",
                     "test":  "jest",
-                    "test:watch":  "jest --watch"
+                    "test:watch":  "jest --watch",
+                    "postinstall":  "npm --prefix client install"
                 },
     "keywords":  [
                      "dnd",
