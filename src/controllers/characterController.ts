@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { CharacterRepository } from '../services/characterRepository';
 import { HpService } from '../services/hpService';
+import { isValidDamageType, VALID_DAMAGE_TYPES } from '../types/damage';
 
 export class CharacterController {
   constructor(private repo: CharacterRepository) {}
@@ -26,8 +27,10 @@ export class CharacterController {
       return;
     }
 
-    if (!damageType || typeof damageType !== 'string' || damageType.trim().length === 0) {
-      res.status(400).json({ error: 'Damage type must be a non-empty string' });
+    if (!damageType || typeof damageType !== 'string' || !isValidDamageType(damageType)) {
+      res.status(400).json({
+        error: `Invalid damage type '${damageType}'. Must be one of: ${VALID_DAMAGE_TYPES.join(', ')}`
+      });
       return;
     }
 
