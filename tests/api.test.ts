@@ -50,7 +50,64 @@ describe('Character API Endpoints', () => {
       expect(res.body.currentHitPoints).toBe(25);
     });
 
-    test('rejects missing or invalid damage payload with 400 Bad Request', async () => {
+    test('halves damage when character has resistance to the damage type', async () => {
+      // 15 slashing damage vs slashing resistance -> Math.floor(15/2) = 7 dmg -> 25 - 7 = 18
+      const res = await request(app)
+        .post('/characters/briv/damage')
+        .send({ amount: 15, damageType: 'slashing' });
+
+      expect(res.status).toBe(200);
+      expect(res.body.currentHitPoints).toBe(18);
+    });
+
+    test('correctly chains resistance mitigation with temporary HP absorption', async () => {
+      // 1. Give Briv 5 Temporary HP (HP: 25, Temp: 5)
+      await request(app)
+        .post('/characters/briv/temp-hp')
+        .send({ amount: 5 });
+
+      // 2. Deal 15 Slashing damage (Briv has Slashing resistance)
+      // Math: 15 / 2 = 7 (rounded down). Temp HP absorbs 5, remaining 2 damage applies to base HP: 25 - 2 = 23
+      const res = await request(app)
+        .post('/characters/briv/damage')
+        .send({ amount: 15, damageType: 'slashing' });
+
+      expect(res.status).toBe(200);
+      expect(res.body.temporaryHitPoints).toBe(0);
+      expect(res.body.currentHitPoints).toBe(23);
+    });
+
+    test('handles temporary HP damage overflow scenario from challenge description', async () => {
+      // Briv HP goes from 25 -> 11 after 14 damage
+      await request(app)
+        .post('/characters/briv/damage')
+        .send({ amount: 14, damageType: 'piercing' });
+
+      // Grants 10 Temp HP (HP: 11, Temp: 10)
+      await request(app)
+        .post('/characters/briv/temp-hp')
+        .send({ amount: 10 });
+
+      // Deal 19 piercing: loses all 10 temp HP and 9 from base HP (11 - 9 = 2)
+      const res = await request(app)
+        .post('/characters/briv/damage')
+        .send({ amount: 19, damageType: 'piercing' });
+
+      expect(res.status).toBe(200);
+      expect(res.body.temporaryHitPoints).toBe(0);
+      expect(res.body.currentHitPoints).toBe(2);
+    });
+
+    test('rejects unsupported damage types (e.g., banana) with 400 Bad Request', async () => {
+      const res = await request(app)
+        .post('/characters/briv/damage')
+        .send({ amount: 10, damageType: 'banana' });
+
+      expect(res.status).toBe(400);
+      expect(res.body.error).toContain("Invalid damage type 'banana'");
+    });
+
+    test('rejects missing or invalid damage amount with 400 Bad Request', async () => {
       const res = await request(app)
         .post('/characters/briv/damage')
         .send({ amount: -5, damageType: 'piercing' });
