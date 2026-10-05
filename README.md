@@ -227,7 +227,7 @@ npm run dev:client
 
 ## Running Tests
 
-The test suite includes 22 automated tests covering core domain math, damage types, resistances, immunities, temp HP edge cases, and API integration.
+The test suite includes 26 automated tests covering core domain math, damage types, resistances, immunities, temp HP edge cases, and API integration.
 
 ```bash
 # Run test suite
